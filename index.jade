@@ -1,0 +1,19 @@
+h1 Crypto Tools
+section(id="freq-check")
+	h2 Frequency Checker
+	textarea
+	button Check Frequencies
+	div(class="results")
+section(id="sub-ciph")
+	h2 Substitution Cipher
+	input(type="text", class="stack from")
+	input(type="text", class="stack to")
+	label(for="subCiphEncrypt") Encryption
+	input(type="radio", name="charDirection", id="subCiphEncrypt", checked="true")
+	label(for="subCiphDecrypt") Decryption
+	input(type="radio", name="charDirection", id="subCiphDecrypt")
+	input(type="number", class="rotVal", min="1", value="3")
+	button(class="rotBut") Rotate character set
+	textarea
+	button Make Substitution
+	div(class="results")
