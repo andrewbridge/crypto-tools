@@ -18,7 +18,10 @@ h3{
 }
 
 table {
-  width: 100%
+  width: 100%;
+  #matrix-layer & {
+    width: auto;
+  }
 }
 
 .stack {
@@ -32,4 +35,8 @@ table {
 
 .clear-res-but {
   display: block;
+}
+
+.highlight {
+  color: red;
 }

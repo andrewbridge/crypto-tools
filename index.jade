@@ -35,9 +35,9 @@ section(id="vig-ciph")
 		span Key text (All characters must be part of the character set above)
 		input(type="text", class="stack key")
 	label(for="vigCiphEncrypt") Encryption
-	input(type="radio", name="charDirection", id="vigCiphEncrypt", checked="true")
+	input(type="radio", name="rotDirection", id="vigCiphEncrypt", checked="true")
 	label(for="vigCiphDecrypt") Decryption
-	input(type="radio", name="charDirection", id="vigCiphDecrypt")
+	input(type="radio", name="rotDirection", id="vigCiphDecrypt")
 	h3 Working Text
 	label
 		span Text to perform substitution on
@@ -48,4 +48,36 @@ section(id="pat-find")
 	h2 Pattern Finder
 	textarea
 	button Find Patterns
+	div(class="results")
+section(id="str-slice")
+	h2 Interval Highlighter
+	label(for="strSliceHighlight") Highlight
+	input(type="radio", name="highlightMode", id="strSliceHighlight", checked="true")
+	label(for="strSliceDecrypt") Delete everything but
+	input(type="radio", name="highlightMode", id="strSliceDecrypt")
+	p How many characters should be highlighted at each interval
+	input(type="number", min="1", value="1", class="length")
+	p Enter the interval you wish to highlight
+	label
+		input(type="number", min="1", value="3", class="interval")
+		span n +
+		input(type="number", min="0", value="0", class="offset")
+	h3 Working Text
+	label
+		span Text to perform highlighting on
+		textarea
+	button Find Patterns
+	div(class="results")
+section(id="matrix-layer")
+	h2 Matrix Layer
+	label
+		span # of columns
+		input(type="number", min="1", value="1", class="length")
+	label(for="matLayEncrypt") Encryption
+	input(type="radio", name="textDirection", id="matLayEncrypt", checked="true")
+	label(for="matLayDecrypt") Decryption
+	input(type="radio", name="textDirection", id="matLayDecrypt")
+	input(type="text", class="stack order")
+	textarea
+	button Lay out into matrix
 	div(class="results")

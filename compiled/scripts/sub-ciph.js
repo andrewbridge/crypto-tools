@@ -1,6 +1,18 @@
+
+/*
+subCiph
+
+Performs a character substitution and character set rotation on data in predefined DOM elements.
+ */
 var subCiph;
 
 subCiph = (function() {
+
+  /*
+  	constructor
+  
+  	Checks for the matching DOM element wrapper and sets up instance variables and event listeners.
+   */
   function subCiph() {
     this.target = document.querySelector("#sub-ciph");
     if (this.target != null) {
@@ -18,6 +30,13 @@ subCiph = (function() {
     }
   }
 
+
+  /*
+  	sub
+  
+  	Performs the character substitution and displays the result on the page.
+   */
+
   subCiph.prototype.sub = function() {
     var i, result, subs, _i, _ref;
     result = this.textarea.value.split("");
@@ -27,6 +46,14 @@ subCiph = (function() {
     }
     return this.resultarea.innerHTML += "<p>" + result.join("") + "</p>";
   };
+
+
+  /*
+  	getSubs
+  
+  	Generates an object of two characters sets from predefined DOM elements,
+  	one is the current character set, the second is the character set to substitute to.
+   */
 
   subCiph.prototype.getSubs = function() {
     var from, num, paceMaker, subs, to, _i, _ref;
@@ -43,6 +70,15 @@ subCiph = (function() {
     }
     return subs;
   };
+
+
+  /*
+  	rotFrom
+  
+  	Performs a character rotation on the character set defined in a predefined DOM element.
+  	Depending on the status of form elements on the page, the method will perform a rotation
+  	backwards or forwards.
+   */
 
   subCiph.prototype.rotFrom = function() {
     var fromArr, i, _i, _j, _ref, _ref1;

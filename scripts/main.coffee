@@ -17,6 +17,8 @@ window[namespace].init = ->
 	window[namespace].subCiph = new subCiph()
 	window[namespace].vigCiph = new vigCiph()
 	window[namespace].patFind = new patFind()
+	window[namespace].strSlice = new strSlice()
+	window[namespace].matrixLayer = new matrixLayer()
 
 # An event listener to ensure the above method is only run once the DOM is ready.
 document.addEventListener "DOMContentLoaded", window[namespace].init, false

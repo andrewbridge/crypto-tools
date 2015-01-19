@@ -1,7 +1,20 @@
+
+/*
+freqCheck
+
+Performs a character frequency check on values in predefined DOM elements and produces HTML
+output to reflect the results.
+ */
 var freqCheck,
   __hasProp = {}.hasOwnProperty;
 
 freqCheck = (function() {
+
+  /*
+  	constructor
+  
+  	Checks for the matching DOM element wrapper and sets up instance variables and event listeners.
+   */
   function freqCheck() {
     this.target = document.querySelector("#freq-check");
     if (this.target != null) {
@@ -11,6 +24,13 @@ freqCheck = (function() {
       this.button.addEventListener("click", this.check.bind(this), false);
     }
   }
+
+
+  /*
+  	check
+  
+  	Performs the character frequency check and calls the display method with the results.
+   */
 
   freqCheck.prototype.check = function() {
     var char, results, text, _i, _len, _ref;
@@ -27,6 +47,17 @@ freqCheck = (function() {
     }
     return this.display(results);
   };
+
+
+  /*
+  	display
+  
+  	Generates HTML for the given results and inserts it into the page.
+  	Also produces some further statistical analysis by converting the values into
+  	percentages.
+  
+  	@param results An objects containing the frequency check results.
+   */
 
   freqCheck.prototype.display = function(results) {
     var char, charStr, freq, freqStr, html, percStr, total;
