@@ -6,14 +6,46 @@ section(id="freq-check")
 	div(class="results")
 section(id="sub-ciph")
 	h2 Substitution Cipher
-	input(type="text", class="stack from")
-	input(type="text", class="stack to")
+	label
+		span Current character set
+		input(type="text", class="stack from")
+	label
+		span Character set to substitute
+		input(type="text", class="stack to")
+	h3 Character set rotator
+	p Set whether you are substituting to encrypt or decrypt and the number of places to rotate by.
 	label(for="subCiphEncrypt") Encryption
 	input(type="radio", name="charDirection", id="subCiphEncrypt", checked="true")
 	label(for="subCiphDecrypt") Decryption
 	input(type="radio", name="charDirection", id="subCiphDecrypt")
 	input(type="number", class="rotVal", min="1", value="3")
 	button(class="rotBut") Rotate character set
-	textarea
+	h3 Working Text
+	label
+		span Text to perform substitution on
+		textarea
 	button Make Substitution
+	div(class="results")
+section(id="vig-ciph")
+	h2 Vigen&eacute;re Cipher
+	label
+		span Character set
+		input(type="text", class="stack from", value="ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	label
+		span Key text (All characters must be part of the character set above)
+		input(type="text", class="stack key")
+	label(for="vigCiphEncrypt") Encryption
+	input(type="radio", name="charDirection", id="vigCiphEncrypt", checked="true")
+	label(for="vigCiphDecrypt") Decryption
+	input(type="radio", name="charDirection", id="vigCiphDecrypt")
+	h3 Working Text
+	label
+		span Text to perform substitution on
+		textarea
+	button Make Substitution
+	div(class="results")
+section(id="pat-find")
+	h2 Pattern Finder
+	textarea
+	button Find Patterns
 	div(class="results")

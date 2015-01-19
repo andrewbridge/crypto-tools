@@ -1,4 +1,14 @@
+###
+subCiph
+
+Performs a character substitution and character set rotation on data in predefined DOM elements.
+###
 class subCiph
+	###
+	constructor
+
+	Checks for the matching DOM element wrapper and sets up instance variables and event listeners.
+	###
 	constructor: ->
 		@target = document.querySelector("#sub-ciph")
 		if @target?
@@ -14,6 +24,11 @@ class subCiph
 			@button.addEventListener "click", @sub.bind(this), false
 			@rotBut.addEventListener "click", @rotFrom.bind(this), false
 
+	###
+	sub
+
+	Performs the character substitution and displays the result on the page.
+	###
 	sub: ->
 		result = @textarea.value.split("")
 		subs = @getSubs()
@@ -21,6 +36,12 @@ class subCiph
 			result[i] = if subs[result[i]]? then subs[result[i]] else result[i]
 		@resultarea.innerHTML += "<p>" + result.join("") + "</p>"
 
+	###
+	getSubs
+
+	Generates an object of two characters sets from predefined DOM elements,
+	one is the current character set, the second is the character set to substitute to.
+	###
 	getSubs: ->
 		subs = {}
 		from = @fromAlpha.value.split("")
@@ -33,6 +54,13 @@ class subCiph
 			subs[from[num]] = to[num]
 		subs
 
+	###
+	rotFrom
+
+	Performs a character rotation on the character set defined in a predefined DOM element.
+	Depending on the status of form elements on the page, the method will perform a rotation
+	backwards or forwards.
+	###
 	rotFrom: ->
 		fromArr = @fromAlpha.value.split("")
 		if @rotDirDe.checked

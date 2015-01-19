@@ -1,4 +1,15 @@
+###
+freqCheck
+
+Performs a character frequency check on values in predefined DOM elements and produces HTML
+output to reflect the results.
+###
 class freqCheck
+	###
+	constructor
+
+	Checks for the matching DOM element wrapper and sets up instance variables and event listeners.
+	###
 	constructor: ->
 		@target = document.querySelector("#freq-check")
 		if @target?
@@ -7,6 +18,11 @@ class freqCheck
 			@resultarea = @target.querySelector(".results")
 			@button.addEventListener "click", @check.bind(this), false
 
+	###
+	check
+
+	Performs the character frequency check and calls the display method with the results.
+	###
 	check: ->
 		results = {}
 		text = @textarea.value
@@ -17,6 +33,15 @@ class freqCheck
 				results[char] = 1
 		@display results
 
+	###
+	display
+
+	Generates HTML for the given results and inserts it into the page.
+	Also produces some further statistical analysis by converting the values into
+	percentages.
+
+	@param results An objects containing the frequency check results.
+	###
 	display: (results) ->
 		charStr = "<thead><tr>"
 		freqStr = "<tbody><tr>"
