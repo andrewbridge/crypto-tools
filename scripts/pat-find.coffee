@@ -68,14 +68,22 @@ class patFind
 		for i in [0..text.length-1]
 			workingText = text.substr i
 			for n in [2..limit]
-				subtext = workingText.substr(n)
-				pos = n
-				while subtext.indexOf(workingText.substr(0, n)) > -1
-					pattern = workingText.substr(0, n)
-					results[pattern] = if results[pattern]? then results[pattern]+1 else 1
-					subtext = subtext.substr(subtext.indexOf(workingText.substr(0, n))+n)
-					pos += subtext.indexOf(workingText.substr(0, n)) + n
+				patternStr = workingText.substr(0, n)
+				pattern = new RegExp(patternStr.replace(/\|/g, "\\|"), "g")
+				if not results[patternStr]?
+					results[patternStr] = workingText.match(pattern).length
 		results
+
+	###
+	sortPatObj
+
+	Sorts a pattern object in descending order.
+
+	@param obj The pattern object.
+	@return A sorted object.
+	###
+	sortPatObj: (obj) ->
+
 
 	###
 	display
@@ -109,7 +117,9 @@ class patFind
 					html += fac + ": " + tot + "[" + Math.round((tot / factorTotal) * 100) + "%], "
 			html = html.substr(0, html.length-2)+ ")</summary></details></td></tr>"
 		html += "</tr></tbody></table><table><thead><tr><td>Pattern</td><td>Occurrences</td></tr></thead><tbody>"
-		for own pattern, occurrence of results.patterns
+		sortedPatKeys = Object.keys(results.patterns).sort((a, b) -> -(results.patterns[a] - results.patterns[b]))
+		for pattern in sortedPatKeys
+			occurrence = results.patterns[pattern]
 			if occurrence > 1
 				html += "<tr><td>" + pattern + "</td><td>" + occurrence + "</td></tr>"
 		html += "</tbody></table>"

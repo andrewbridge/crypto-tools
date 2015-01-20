@@ -93,23 +93,32 @@ patFind = (function() {
    */
 
   patFind.prototype.findStrPats = function(limit, text) {
-    var i, n, pattern, pos, results, subtext, workingText, _i, _j, _ref;
+    var i, n, pattern, patternStr, results, workingText, _i, _j, _ref;
     results = {};
     for (i = _i = 0, _ref = text.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
       workingText = text.substr(i);
       for (n = _j = 2; 2 <= limit ? _j <= limit : _j >= limit; n = 2 <= limit ? ++_j : --_j) {
-        subtext = workingText.substr(n);
-        pos = n;
-        while (subtext.indexOf(workingText.substr(0, n)) > -1) {
-          pattern = workingText.substr(0, n);
-          results[pattern] = results[pattern] != null ? results[pattern] + 1 : 1;
-          subtext = subtext.substr(subtext.indexOf(workingText.substr(0, n)) + n);
-          pos += subtext.indexOf(workingText.substr(0, n)) + n;
+        patternStr = workingText.substr(0, n);
+        pattern = new RegExp(patternStr.replace(/\|/g, "\\|"), "g");
+        if (results[patternStr] == null) {
+          results[patternStr] = workingText.match(pattern).length;
         }
       }
     }
     return results;
   };
+
+
+  /*
+  	sortPatObj
+  
+  	Sorts a pattern object in descending order.
+  
+  	@param obj The pattern object.
+  	@return A sorted object.
+   */
+
+  patFind.prototype.sortPatObj = function(obj) {};
 
 
   /*
@@ -123,7 +132,7 @@ patFind = (function() {
    */
 
   patFind.prototype.display = function(results) {
-    var analysis, char, fac, factor, factorTotal, factorTotals, factors, html, occurrence, pattern, tot, total, _i, _j, _len, _len1, _ref, _ref1, _ref2;
+    var analysis, char, fac, factor, factorTotal, factorTotals, factors, html, occurrence, pattern, sortedPatKeys, tot, total, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
     html = "<table><thead><tr><td rowspan=\"2\">Letter</td><td colspan=\"2\">Analysis</td></tr><tr><td>Total</td><td>Occurrences (Factors)</td></thead>";
     total = 0;
     _ref = results.position;
@@ -160,10 +169,12 @@ patFind = (function() {
       html = html.substr(0, html.length - 2) + ")</summary></details></td></tr>";
     }
     html += "</tr></tbody></table><table><thead><tr><td>Pattern</td><td>Occurrences</td></tr></thead><tbody>";
-    _ref2 = results.patterns;
-    for (pattern in _ref2) {
-      if (!__hasProp.call(_ref2, pattern)) continue;
-      occurrence = _ref2[pattern];
+    sortedPatKeys = Object.keys(results.patterns).sort(function(a, b) {
+      return -(results.patterns[a] - results.patterns[b]);
+    });
+    for (_k = 0, _len2 = sortedPatKeys.length; _k < _len2; _k++) {
+      pattern = sortedPatKeys[_k];
+      occurrence = results.patterns[pattern];
       if (occurrence > 1) {
         html += "<tr><td>" + pattern + "</td><td>" + occurrence + "</td></tr>";
       }
