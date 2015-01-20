@@ -63,13 +63,15 @@ class matrixLayer
 		order = @order.value.split("")
 		for column in results
 			html += "<tr>"
+			tmp = ""
 			for cell in column
 				html += "<td>" + cell + "</td>"
+				tmp += cell
 			if order.length is @cols.valueAsNumber
 				for pos in order
 					text += column[parseInt(pos)-1]
 			else
-				text += cell
+				text += tmp
 			html += "</tr>"
 		html += "</tbody></table><p>" + text + "</p>"
 		@resultarea.innerHTML += html
