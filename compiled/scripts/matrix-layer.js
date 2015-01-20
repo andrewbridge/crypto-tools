@@ -76,16 +76,18 @@ matrixLayer = (function() {
    */
 
   matrixLayer.prototype.display = function(results) {
-    var cell, column, html, order, pos, text, _i, _j, _k, _len, _len1, _len2;
+    var cell, column, html, order, pos, text, tmp, _i, _j, _k, _len, _len1, _len2;
     html = "<table><tbody>";
     text = "";
     order = this.order.value.split("");
     for (_i = 0, _len = results.length; _i < _len; _i++) {
       column = results[_i];
       html += "<tr>";
+      tmp = "";
       for (_j = 0, _len1 = column.length; _j < _len1; _j++) {
         cell = column[_j];
         html += "<td>" + cell + "</td>";
+        tmp += cell;
       }
       if (order.length === this.cols.valueAsNumber) {
         for (_k = 0, _len2 = order.length; _k < _len2; _k++) {
@@ -93,7 +95,7 @@ matrixLayer = (function() {
           text += column[parseInt(pos) - 1];
         }
       } else {
-        text += cell;
+        text += tmp;
       }
       html += "</tr>";
     }
